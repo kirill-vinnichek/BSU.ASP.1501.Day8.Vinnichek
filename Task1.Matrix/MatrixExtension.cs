@@ -43,15 +43,15 @@ namespace Task1.Matrix
 
 
 
-        public static Matrix<T>  GetMatrix<T>(T[][] array)
+        public static Matrix<TT>  GetMatrix<TT>(TT[][] array)
         {
             if (array.IsSquare())
             {
                 if (array.IsDiagonal())
-                    return new DiagonalMatrix<T>(array);
+                    return new DiagonalMatrix<TT>(array);
                 if (array.IsSymmetry())
-                    return new SymmetricMatrix<T>(array);
-                return new SquareMatrix<T>(array);
+                    return new SymmetricMatrix<TT>(array);
+                return new SquareMatrix<TT>(array);
             }
             return null;
         }

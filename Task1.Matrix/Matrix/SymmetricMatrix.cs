@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +11,10 @@ namespace Task1.Matrix
     {
 
         public SymmetricMatrix(T[][] array)
-            : base(array.Length)
+            : base(array)
         {
-            if (array == null)
-                throw new ArgumentNullException();
-            if (!array.IsSquare())
-                throw new ArgumentException("Array is not Square");
-            if (!array.IsSquare())
-                throw new ArgumentException("Martix has to be symmetrical");
-            Initialize(array);
-
+            Contract.Requires(array != null);
+            Contract.Requires(array.IsSymmetry());
         }
 
 

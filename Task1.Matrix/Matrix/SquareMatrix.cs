@@ -12,14 +12,6 @@ namespace Task1.Matrix
 
         protected readonly T[][] array;
 
-        public SquareMatrix(int size)
-        {           
-            
-            if (size > 0)
-                array = new T[size][];
-            else
-                throw new ArgumentOutOfRangeException();
-        }
 
         public SquareMatrix(T[][] array)
         {
