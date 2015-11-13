@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace Task1.Matrix
             }
             return true;
         }
+      
         public static bool IsSymmetry<T>(this T[][] array)
         {
             for (int i = 0; i < array.Length; i++)

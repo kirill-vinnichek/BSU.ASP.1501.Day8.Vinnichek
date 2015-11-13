@@ -19,45 +19,20 @@ namespace Task1.Matrix
             this.array = new T[array.Length];
             for (int i = 0; i < array.Length; i++)
                 this.array[i] = array[i][i];
+            Dimension = array.Length;
         }
 
-
-        public override T this[int i, int j]
+        protected override T Get(int i,int j)
         {
-            get
-            {
-                if (!IsIndexRigth(i))
-                    throw new ArgumentOutOfRangeException();
-                if (!IsIndexRigth(j))
-                    throw new ArgumentOutOfRangeException();
-                if (i != j)
-                    return default(T);
-                return array[i];
-            }
-            set
-            {
-                if (!IsIndexRigth(i))
-                    throw new ArgumentOutOfRangeException();
-                if (!IsIndexRigth(j))
-                    throw new ArgumentOutOfRangeException();
-                if (i == j)
-                {
-                    var old = array[i];
-                    array[i] = value;
-                    OnChange(this, new MatrixEventArgs<T>(i, j, old, array[i]));
-                }
-            }
+            if (i != j)
+                return default(T);
+            return array[i];
         }
-
-        public override int Dimension
+        protected override void Set(T value,int i,int j)
         {
-            get
-            {
-                return array.Length;
-            }
+            if (i == j)              
+                array[i] = value;              
+            
         }
-
-
-
     }
 }

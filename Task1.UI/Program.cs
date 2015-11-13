@@ -22,10 +22,12 @@ namespace Task1.UI
             c.Change = OnChange;
             c[1, 1] = 17;
             var array = new int[2][];
-            array[0]= new[]{1,2};
+            array[0]= new[]{2,2};
             array[1] = new[]{2,1};
             var sm = new SymmetricMatrix<int>(array);
+            sm.Change = OnChange;
             Console.WriteLine(sm);
+            sm[0, 1] = 17;
             Console.ReadKey();
         }
 

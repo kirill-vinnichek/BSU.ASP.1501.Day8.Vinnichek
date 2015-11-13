@@ -7,39 +7,43 @@ using System.Threading.Tasks;
 
 namespace Task1.Matrix
 {
-    public class SymmetricMatrix<T> : SquareMatrix<T>
+    public class SymmetricMatrix<T> : Matrix<T>
     {
-
+        private T[][] array;
+       
         public SymmetricMatrix(T[][] array)
-            : base(array)
         {
-            Contract.Requires(array != null);
-            Contract.Requires(array.IsSymmetry());
+            if (array == null)
+                throw new ArgumentNullException();
+            if (!array.IsSquare())
+                throw new ArgumentException("Array is not square");
+            this.array = new T[array.Length][];
+            for (int i = 0; i < array.Length; i++)
+            {
+                this.array[i] = new T[i+1];
+                Array.Copy(array[i], this.array[i], i+1);
+            }
+            Dimension = array.Length;
         }
+
+
+        protected override T Get(int i, int j)
+        {
+            return j > i ? array[j][i] : array[i][j];            
+        }
+
+        protected override void Set(T value, int i, int j)
+        {
+            if (j > i)
+                array[j][i] = value;
+            else
+                array[i][j] = value;
+        }
+
+       
+       
 
 
        
-
-        public override T this[int i, int j]
-        {
-            get
-            {
-               return base[i, j];
-            }
-            set
-            {
-                if (!IsIndexRigth(i))
-                    throw new ArgumentOutOfRangeException();
-                if (!IsIndexRigth(j))
-                    throw new ArgumentOutOfRangeException();
-                var old = array[i][j];
-                array[i][j] = value;
-                OnChange(this, new MatrixEventArgs<T>(i, j, old, array[i][j]));
-                old = array[j][i];
-                array[j][i] = value;
-                OnChange(this, new MatrixEventArgs<T>(j, i, old, array[i][j]));
-            }
-        }
-
     }
 }
